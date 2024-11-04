@@ -3,11 +3,33 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import rootReducer from './reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import { Toaster } from 'react-hot-toast';
+import { thunk } from 'redux-thunk'; // Thunk middleware import
+import logger from 'redux-logger'; // Logger middleware import
+
+// Configure Redux store with thunk and logger middleware
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Disable if it causes issues with non-serializable data
+      immutableCheck: false, // Disable immutability check if necessary
+    }).concat(thunk, logger), // Add redux-thunk and redux-logger middleware
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+          <App />
+          <Toaster/>
+      </BrowserRouter>
+    </Provider>  
   </React.StrictMode>
 );
 

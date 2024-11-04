@@ -1,0 +1,22 @@
+export const countryCode = [
+    {
+        "country":"India",
+        "code":"+91"
+    },
+    {
+        "country":"Brazil",
+        "code":"+55"
+    },
+    {
+        "country":"china",
+        "code":"+86"
+    },
+    {
+        "country":"Denmark",
+        "code":"+45"
+    },
+    {
+        "country":"Egypt",
+        "code":"+20"
+    },
+]
