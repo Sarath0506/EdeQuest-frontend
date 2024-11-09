@@ -15,12 +15,28 @@ const EnrolledCourses = () => {
       setEnrolledCourses(response);
     } catch (error) {
       console.error('Unable to fetch enrolled courses:', error);
+      setEnrolledCourses([]); // Prevents indefinite loading
     }
   };
 
   useEffect(() => {
-    fetchEnrolledCourses();
-  }, []);
+    if (token) {
+      fetchEnrolledCourses();
+    }
+  }, [token]);
+
+  const handleCourseClick = (course) => {
+    const sectionId = course.courseContent?.[0]?._id;
+    const subSectionId = course.courseContent?.[0]?.subSection?.[0]?._id;
+
+    if (!sectionId || !subSectionId) {
+      console.error('Missing section or sub-section ID', { sectionId, subSectionId });
+      alert('Cannot navigate: Section or sub-section missing.');
+      return;
+    }
+
+    navigate(`/view-course/${course._id}/section/${sectionId}/sub-section/${subSectionId}`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center py-10 px-4">
@@ -41,61 +57,56 @@ const EnrolledCourses = () => {
             </div>
 
             {/* Enrolled Courses */}
-            {enrolledCourses.map((course) => (
-              <div
-                key={course._id}
-                className="grid grid-cols-3 gap-6 items-center border-b pb-4"
-              >
-                {/* Course Info */}
+            {enrolledCourses.map((course) => {
+              const sectionId = course.courseContent?.[0]?._id;
+              const subSectionId = course.courseContent?.[0]?.subSection?.[0]?._id;
+              const isClickable = sectionId && subSectionId;
+
+              return (
                 <div
-                  onClick={() => {
-                    const sectionId = course.courseContent?.[0]?._id;
-                    const subSectionId = course.courseContent?.[0]?.subSection?.[0]?._id;
-
-                    if (!sectionId || !subSectionId) {
-                      console.error("Missing section or sub-section ID", { sectionId, subSectionId });
-                      alert("Cannot navigate: Section or sub-section missing.");
-                      return;
-                    }
-
-                    navigate(`/view-course/${course._id}/section/${sectionId}/sub-section/${subSectionId}`);
-                  }}
-                  className="flex items-center space-x-6 cursor-pointer"
+                  key={course._id}
+                  onClick={isClickable ? () => handleCourseClick(course) : null}
+                  className={`grid grid-cols-3 gap-6 items-center border-b pb-4 ${
+                    isClickable ? 'cursor-pointer' : 'cursor-not-allowed'
+                  }`}
                 >
-                  <img
-                    src={course.thumbnail}
-                    alt="Course Thumbnail"
-                    className="w-28 h-20 rounded-md object-cover shadow-lg"
-                  />
-                  <div>
-                    <p className="text-xl font-semibold text-white">{course.courseName}</p>
-                    <p className="text-sm text-gray-300">{course.courseDescription}</p>
+                  {/* Course Info */}
+                  <div className="flex items-center space-x-6">
+                    <img
+                      src={course.thumbnail}
+                      alt="Course Thumbnail"
+                      className="w-28 h-20 rounded-md object-cover shadow-lg"
+                    />
+                    <div>
+                      <p className="text-xl font-semibold text-white">{course.courseName}</p>
+                      <p className="text-sm text-gray-300">{course.courseDescription}</p>
+                    </div>
+                  </div>
+
+                  {/* Course Duration */}
+                  <div className="text-center">
+                    <p className="text-lg text-gray-200">
+                      Duration: {course.totalDuration || 'N/A'}
+                    </p>
+                  </div>
+
+                  {/* Course Progress */}
+                  <div className="flex flex-col items-center">
+                    <p className="text-lg text-white mb-2">
+                      Progress: {Math.min(course.progressPercentage || 0, 100)}%
+                    </p>
+                    <ProgressBar
+                      completed={Math.min(course.progressPercentage || 0, 100)}
+                      height="10px"
+                      isLabelVisible={false}
+                      className="w-full max-w-sm"
+                      bgColor="#22c55e"
+                      baseBgColor="#374151"
+                    />
                   </div>
                 </div>
-
-                {/* Course Duration */}
-                <div className="text-center">
-                  <p className="text-lg text-gray-200">
-                    Duration: {course.totalDuration || 'N/A'}
-                  </p>
-                </div>
-
-                {/* Course Progress */}
-                <div className="flex flex-col items-center">
-                  <p className="text-lg text-white mb-2">
-                    Progress: {Math.min(course.progressPercentage || 0, 100)}%
-                  </p>
-                  <ProgressBar
-                    completed={Math.min(course.progressPercentage || 0, 100)}
-                    height="10px"
-                    isLabelVisible={false}
-                    className="w-full max-w-sm"
-                    bgColor="#22c55e"
-                    baseBgColor="#374151"
-                  />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
