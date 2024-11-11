@@ -18,16 +18,6 @@ function Temp({ title, dec1, dec2, image, formType }) {
 
         {formType === "signup" ? (<SignUpForm/>) : (<LoginForm/>)}
 
-        <div className="flex w-full items-center my-4 gap-x-2">
-          <div className="h-[1px] w-full bg-slate-500"></div>
-          <p className="text-richblack-700 font-medium leading-[1.375rem]">Or</p>
-          <div className="h-[1px] w-full bg-slate-500"></div>
-        </div>
-
-        <button className="w-full flex items-center justify-center rounded-[8px] font-medium text-richblack-100 border px-[12px] py-[8px] gap-x-2 mt-6 border-gray-800  bg-gray-800">
-          <FcGoogle/>
-          <p>Sign in with Google</p>
-        </button>
       </div>
 
       <div className="relative w-11/12 max-w-[450px] flex flex-col">
