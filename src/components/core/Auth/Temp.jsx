@@ -30,24 +30,36 @@ function Temp({ title, dec1, dec2, image, formType }) {
         </button>
       </div>
 
-      <div className="relative w-11/12 max-w-[450px]">
-        <img
-          src={frame}
-          width={558}
-          height={584}
-          loading='lazy'
-          alt="Frame"
-        />
+      <div className="relative w-11/12 max-w-[450px] flex flex-col">
+        
+        <div>
+          <img
+            src={frame}
+            width={558}
+            height={584}
+            loading='lazy'
+            alt="Frame"
+          />
 
-        <img
-          src={image}
-          width={558}
-          height={584}
-          loading='lazy'
-          alt="Main"
-          className="absolute -top-4 right-4 "
-        />
+          <img
+            src={image}
+            width={558}
+            height={584}
+            loading='lazy'
+            alt="Main"
+            className="absolute -top-4 right-4 "
+          />
+        </div>
+
+        <div className="w-11/12 max-w-[450px] mx-auto p-4 bg-gray-100 border border-gray-300 rounded-lg text-gray-800">
+          <h2 className="text-lg font-semibold mb-2">Student Login Details</h2>
+          <p>Email: hocexi8272@bulatox.com</p>
+          <p>Password: 123456</p>
+        </div>
+
       </div>
+
+      
 
     </div>
   );
