@@ -41,7 +41,7 @@ function Temp({ title, dec1, dec2, image, formType }) {
           />
         </div>
 
-        <div className="w-11/12 max-w-[450px] mx-auto p-4 bg-gray-100 border border-gray-300 rounded-lg text-gray-800">
+        <div className="w-11/12 max-w-[450px] mx-auto p-8 rounded-lg text-white">
           <h2 className="text-lg font-semibold mb-2">Student Login Details</h2>
           <p>Email: hocexi8272@bulatox.com</p>
           <p>Password: 123456</p>
