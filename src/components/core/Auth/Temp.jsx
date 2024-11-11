@@ -41,7 +41,7 @@ function Temp({ title, dec1, dec2, image, formType }) {
           />
         </div>
 
-        <div className="w-11/12 max-w-[450px] mx-auto p-8 rounded-lg text-white">
+        <div className="w-11/12 max-w-[450px] mx-auto pt-8 rounded-lg text-white">
           <table className="w-full text-left table-auto border-collapse">
             <thead>
               <tr className="bg-gray-800 text-white">
