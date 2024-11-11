@@ -42,9 +42,27 @@ function Temp({ title, dec1, dec2, image, formType }) {
         </div>
 
         <div className="w-11/12 max-w-[450px] mx-auto p-8 rounded-lg text-white">
-          <h2 className="text-lg font-semibold mb-2">Student Login Details</h2>
-          <p>Email: hocexi8272@bulatox.com</p>
-          <p>Password: 123456</p>
+          <table className="w-full text-left table-auto border-collapse">
+            <thead>
+              <tr className="bg-gray-800 text-white">
+                <th className="px-4 py-2 border-b-2 border-gray-600">Login Details</th>
+                <th className="px-4 py-2 border-b-2 border-gray-600">Email</th>
+                <th className="px-4 py-2 border-b-2 border-gray-600">Password</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="bg-gray-700 text-white">
+                <td className="px-4 py-2 border-b border-gray-600">Student</td>
+                <td className="px-4 py-2 border-b border-gray-600">hocexi8272@bulatox.com</td>
+                <td className="px-4 py-2 border-b border-gray-600">123456</td>
+              </tr>
+              <tr className="bg-gray-700 text-white">
+                <td className="px-4 py-2 border-b border-gray-600">Instructor</td>
+                <td className="px-4 py-2 border-b border-gray-600">-</td>
+                <td className="px-4 py-2 border-b border-gray-600">-</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
       </div>
