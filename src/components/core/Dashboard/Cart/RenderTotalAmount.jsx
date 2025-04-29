@@ -18,9 +18,11 @@ const RenderTotalAmount = () => {
     }, [shouldNavigate, navigate]);
 
     const handleBuyCourse = () => {
-        const courses = cart.map((course) => course._id);
-        buyCourse(token, courses, user, dispatch, setShouldNavigate);
-    };
+    const courses = cart.map((course) => course._id);
+    console.log("Courses array to buyCourse:", courses); // Add this line
+    buyCourse(token, courses, user, dispatch, setShouldNavigate);
+};
+
 
     return (
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-white space-y-6">
