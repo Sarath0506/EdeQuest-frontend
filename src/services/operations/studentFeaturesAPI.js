@@ -29,7 +29,7 @@ export async function buyCourse(token, courses, userDetails, dispatch, setShould
         if (!razorpayLoaded) {
             throw new Error("Razorpay SDK failed to load.");
         }
-
+        console.log("Sending to capturePayment:", { courses });
         const orderResponse = await apiConnector("POST", COURSE_PAYMENT_API, { courses }, {
             Authorization: `Bearer ${token}`,
         });
